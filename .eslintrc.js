@@ -46,7 +46,7 @@ module.exports = {
     'arrow-parens': 1,
     'react-hooks/exhaustive-deps': 1,
     'no-useless-return': 1,
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx', 'css', 'json'] }],
     'import/extensions': [
       'error',
       'ignorePackages',
