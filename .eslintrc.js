@@ -25,6 +25,8 @@ module.exports = {
     'import',
     '@typescript-eslint',
   ],
+  'no-useless-constructor': 'off',
+  '@typescript-eslint/no-useless-constructor': 'warn',
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
@@ -46,6 +48,7 @@ module.exports = {
     'arrow-parens': 1,
     'react-hooks/exhaustive-deps': 1,
     'no-useless-return': 1,
+    'no-underscore-dangle': 0,
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx', 'css', 'json'] }],
     'import/extensions': [
       'error',
@@ -57,6 +60,7 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'lines-between-class-members': 0,
   },
   settings: {
     'import/resolver': {
