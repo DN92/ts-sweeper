@@ -1,15 +1,15 @@
 import CellAbstract from './CellAbstract'
-import CellType from './cellTypeEnum'
+import cellType from './cellTypeEnum'
 import cellStyles from './styleEnums';
 
-class BombFlagged extends CellAbstract {
+class DefaultCell extends CellAbstract {
   constructor(x: number, y: number) {
     super(x, y);
-    this.type = CellType.BOMB_FLAGGED;
+    this.type = cellType.UNSET;
     this.hasBomb = true;
     this.isFlagged = true;
-    this.style = cellStyles.bombFlagged;
+    this.style = cellStyles.blankHidden;
   }
 }
 
-export default BombFlagged
+export default DefaultCell

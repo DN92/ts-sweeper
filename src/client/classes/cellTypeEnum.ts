@@ -1,4 +1,4 @@
-enum CellType {
+enum cellType {
   UNSET = 'unset',
   BLANK_HIDDEN = 'blank-hidden',
   BLANK_FLAGGED = 'blank-flagged',
@@ -9,4 +9,4 @@ enum CellType {
   RED_BOMB = 'red-bomb'
 }
 
-export default CellType
+export default cellType

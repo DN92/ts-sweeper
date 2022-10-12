@@ -1,4 +1,12 @@
-import GameCell from './GameCell';
+import BlankFlaggedCell from './BlankFlaggedCell'
+import BlankHiddenCell from './BlankHiddenCell';
+import BlankRevealedCell from './BlankRevealedCell';
+import BombFlaggedCell from './BombFlaggedCell';
+import BombHiddenCell from './BombHiddenCell';
+import BombRevealedCell from './BombRevealedCell';
+import RedBombCell from './RedBombCell';
+import DefaultCell from './DefaultCell';
+import GameCell from './CellAbstract'
 
 class GameBoard {
   rows: number;
@@ -21,7 +29,7 @@ class GameBoard {
     for (let i = 0; i < this.rows; i++) {
       const arrayRow: GameCell[] = [];
       for (let j = 0; j < this.columns; j++) {
-        arrayRow.push(new GameCell(j, i));
+        arrayRow.push(new DefaultCell(j, i));
       }
       this.board.push(arrayRow);
     }

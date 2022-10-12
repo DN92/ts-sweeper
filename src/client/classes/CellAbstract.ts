@@ -1,11 +1,7 @@
-import CellType from "./CellTypeEnum";
+import CellType from "./cellTypeEnum";
+import cellStyles from "./styleEnums"
+import CellCSSandImage from "./CellCSSandImage";
 
-enum Style {
-  base = 'base',
-  highlighted = 'highlighted',
-  revealed = 'revealed',
-  busted = 'busted'
-}
 
 interface Coor {
   xCoor: number | null,
@@ -13,13 +9,13 @@ interface Coor {
 }
 
 abstract class CellAbstract {
-  type: CellType;
   coor: Coor;
+  type: CellType
   hasBomb: boolean;
   adjBombs: number | null;
   isFlagged: boolean;
   isRevealed: boolean;
-  style: Style;
+  style: CellCSSandImage;
   constructor(x: number, y: number) {
     this.coor = { xCoor: x, yCoor: y };
     this.type = CellType.UNSET
@@ -27,7 +23,7 @@ abstract class CellAbstract {
     this.adjBombs = null;
     this.isFlagged = false;
     this.isRevealed = false;
-    this.style = Style.base;
+    this.style = cellStyles.blankHidden;
   }
 
   getAdjBombCount() {
@@ -56,19 +52,6 @@ abstract class CellAbstract {
 
   toggleFlagged() {
     this.isFlagged = !this.isFlagged;
-  }
-
-  setStyle(newStyle: Style) {
-    const possibleStyles = ['base', 'highlighted', 'revealed', 'bust'];
-    if (possibleStyles.includes(newStyle.toLowerCase())) {
-      this.style = newStyle;
-      return true;
-    }
-    return false;
-  }
-
-  setDerivedStyle() {
-    this.setStyle(this.isRevealed ? Style.revealed : Style.base);
   }
 }
 
