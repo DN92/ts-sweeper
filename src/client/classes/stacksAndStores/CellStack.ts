@@ -1,5 +1,4 @@
-import cellAbstract from "client/classes/BombHiddenCell";
-import CellAbstract from "client/classes/CellAbstract";
+import CellAbstract from '../cells/CellAbstract'
 
 interface GameOptions {
   bombs: number,
