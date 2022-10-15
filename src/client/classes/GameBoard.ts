@@ -6,15 +6,13 @@ import BombHiddenCell from './BombHiddenCell';
 import BombRevealedCell from './BombRevealedCell';
 import RedBombCell from './RedBombCell';
 import DefaultCell from './DefaultCell';
-import GameCell from './CellAbstract'
+import CellAbstract from './CellAbstract'
 
 class GameBoard {
   rows: number;
   columns: number;
   bombs: number;
-  board: GameCell[][];
-
-
+  board: CellAbstract[][];
   constructor(rows: number, columns: number, bombs: number) {
     this.rows = rows;
     this.columns = columns;
@@ -24,10 +22,10 @@ class GameBoard {
   }
 
   generateBoard() {
-    const gameBoardMemo = [];
+    const gameBoardMemo: [number, number][] = [];
 
     for (let i = 0; i < this.rows; i++) {
-      const arrayRow: GameCell[] = [];
+      const arrayRow: CellAbstract[] = [];
       for (let j = 0; j < this.columns; j++) {
         arrayRow.push(new DefaultCell(j, i));
       }
@@ -42,15 +40,17 @@ class GameBoard {
 
     for (let i = 0; i < this.bombs; i++) {
       const randomIdx = Math.floor(Math.random() * gameBoardMemo.length);
-      const [xCoor, yCoor] = gameBoardMemo[randomIdx];
-      this.board[xCoor][yCoor].setHasBomb(true);
-      gameBoardMemo.splice(randomIdx, 1);
+      const [xCoor, yCoor]: [number, number] = gameBoardMemo[randomIdx];
     }
 
-    this.board.flat()
-      .forEach((cell) => {
-        cell.setAdjBombCount(this.getAdjBombCount(cell));
-      });
+    // this.board.flat()
+    //   .forEach((cell) => {
+    //     cell.setAdjBombCount(this.getAdjBombCount(cell));
+    //   });
+  }
+
+  swapCells(newCell: CellAbstract): void {
+
   }
 
   getBoardSize() {
@@ -88,10 +88,10 @@ class GameBoard {
     return counter;
   }
 
-  getAdjCells(gameCell: GameCell) {
+  getAdjCells(gameCell: CellAbstract) {
     const { xCoor, yCoor } = gameCell.coor;
     if (xCoor === null || yCoor === null) return [];
-    const adjCells: GameCell[] = [];
+    const adjCells: CellAbstract[] = [];
     const possibleCells = [
       [xCoor - 1, yCoor - 1],
       [xCoor, yCoor - 1],
@@ -110,7 +110,7 @@ class GameBoard {
     return adjCells;
   }
 
-  getAdjFlagCount(gameCell: GameCell) {
+  getAdjFlagCount(gameCell: CellAbstract) {
     let counter = 0;
     this.getAdjCells(gameCell).forEach((cell) => {
       if (cell.getIsFlagged()) counter++;
@@ -118,7 +118,7 @@ class GameBoard {
     return counter;
   }
 
-  getAdjBombCount(gameCell: GameCell) {
+  getAdjBombCount(gameCell: CellAbstract) {
     let counter = 0;
     this.getAdjCells(gameCell).forEach((cell) => {
       if (cell.getHasBomb()) counter++;
@@ -130,10 +130,10 @@ class GameBoard {
     return this.getRevealedCount() === 0;
   }
 
-  remakeCell(gameCell: GameCell) {
+  remakeCell(gameCell: CellAbstract) {
     const { yCoor, xCoor } = gameCell.coor;
     if (yCoor && xCoor) {
-      this.board[yCoor][xCoor] = new GameCell(null, null, { ...gameCell });
+      this.board[yCoor][xCoor] = new CellAbstract(null, null, { ...gameCell });
     }
   }
 

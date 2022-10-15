@@ -8,7 +8,7 @@ interface Coor {
   yCoor: number | null,
 }
 
-abstract class CellAbstract {
+class CellAbstract {
   coor: Coor;
   type: CellType
   hasBomb: boolean;
@@ -16,7 +16,7 @@ abstract class CellAbstract {
   isFlagged: boolean;
   isRevealed: boolean;
   style: CellCSSandImage;
-  constructor(x: number, y: number) {
+  constructor(x: number | null, y: number | null) {
     this.coor = { xCoor: x, yCoor: y };
     this.type = CellType.UNSET
     this.hasBomb = false;
@@ -26,31 +26,38 @@ abstract class CellAbstract {
     this.style = cellStyles.blankHidden;
   }
 
-  getAdjBombCount() {
+  //  TYPE OUT THESE FUNCTIONS
+
+  getAdjBombCount(): number | null  {
     return this.adjBombs;
   }
 
-  getIsRevealed() {
+  getIsRevealed(): boolean {
     return this.isRevealed;
   }
 
-  getIsFlagged() {
+  getIsFlagged(): boolean {
     return this.isFlagged;
   }
 
-  setIsRevealed(bool: boolean) {
+  setIsRevealed(bool: boolean): void {
     this.isRevealed = bool;
   }
 
-  setAdjBombCount(bombs: number) {
+  setAdjBombCount(bombs: number): void {
     this.adjBombs = bombs;
   }
 
-  setIsFlagged(bool: boolean) {
+  setIsFlagged(bool: boolean): void {
     this.isFlagged = bool;
   }
 
-  toggleFlagged() {
+  setCoor(x: number, y: number): void {
+    this.coor.xCoor = x;
+    this.coor.yCoor = y
+  }
+
+  toggleFlagged(): void {
     this.isFlagged = !this.isFlagged;
   }
 }
