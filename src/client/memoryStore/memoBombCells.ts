@@ -1,4 +1,4 @@
-import BombHidden from "client/classes/BombHiddenCell";
+import cellAbstract from "client/classes/BombHiddenCell";
 import CellAbstract from "client/classes/CellAbstract";
 
 
@@ -12,7 +12,7 @@ interface GameOptions {
 
 type CellConstructor = new(x: number | null, y: number | null ) => CellAbstract
 
-class BombStore{
+class CellStore{
   gameOptions: GameOptions
   bombStore: CellAbstract[]
   constructor(gameOptions: GameOptions, cellConstructor: CellConstructor) {
@@ -20,23 +20,23 @@ class BombStore{
     this.bombStore = new Array(gameOptions.bombs).fill(new cellConstructor(null, null))
   }
 
-  takeHiddenBomb(x: number, y:number): BombHidden {
-    let bomb: BombHidden | undefined = this.bombStore.pop()
-    if (bomb) bomb.setCoor(x, y)
-    return bomb ? bomb : new BombHidden(x, y)
+  takeCell(x: number, y:number): cellAbstract {
+    const cell: cellAbstract | undefined = this.bombStore.pop()
+    if (cell) cell.setCoor(x, y)
+    return cell ? cell : new cellAbstract(x, y)
   }
 
-  returnHiddenBomb(bombHidden: BombHidden): void {
-    this.bombStore.push(bombHidden)
+  returnCell(cell: cellAbstract): void {
+    this.bombStore.push(cell)
   }
 
-  fillHiddenStore(): void {
+  fillStore(): void {
     while(this.bombStore.length < this.gameOptions.bombs) {
-      this.bombStore.push(new BombHidden(null, null))
+      this.bombStore.push(new cellAbstract(null, null))
     }
   }
 
-  emptyHiddenStore(): void {
+  emptyStore(): void {
     while(this.bombStore.length) {
       this.bombStore = []
     }
@@ -72,4 +72,4 @@ class BombStore{
 //   return { takeHiddenBomb, returnHiddenBomb, fillHiddenStore, emptyHiddenStore }
 // }
 
-export default BombStore
+export default CellStore
