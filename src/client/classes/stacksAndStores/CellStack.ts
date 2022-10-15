@@ -14,26 +14,24 @@ class CellStack{
     this.cellStack = new Array(gameOptions.bombs).fill(new cellConstructor(null, null))
   }
 
-  takeCell(x: number, y:number): cellAbstract {
-    const cell: cellAbstract | undefined = this.cellStack.pop()
+  takeCell(x: number, y: number): CellAbstract {
+    const cell: CellAbstract | undefined = this.cellStack.pop()
     if (cell) cell.setCoor(x, y)
-    return cell ? cell : new cellAbstract(x, y)
+    return cell ? cell : new CellAbstract(x, y)
   }
 
-  returnCell(cell: cellAbstract): void {
+  returnCell(cell: CellAbstract): void {
     this.cellStack.push(cell)
   }
 
   fillStore(): void {
     while(this.cellStack.length < this.gameOptions.bombs) {
-      this.cellStack.push(new cellAbstract(null, null))
+      this.cellStack.push(new CellAbstract(null, null))
     }
   }
 
   emptyStore(): void {
-    while(this.cellStack.length) {
-      this.cellStack = []
-    }
+    this.cellStack = []
   }
 }
 
