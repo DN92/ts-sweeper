@@ -1,12 +1,9 @@
-import BlankFlaggedCell from './BlankFlaggedCell'
-import BlankHiddenCell from './BlankHiddenCell';
-import BlankRevealedCell from './BlankRevealedCell';
-import BombFlaggedCell from './BombFlaggedCell';
-import BombHiddenCell from './BombHiddenCell';
-import BombRevealedCell from './BombRevealedCell';
-import RedBombCell from './RedBombCell';
 import DefaultCell from './DefaultCell';
 import CellAbstract from './CellAbstract'
+
+import CellStackManager from '../cellWorkers/CellStackManager'
+
+type twoNumberTuple = [number, number]
 
 class GameBoard {
   rows: number;
@@ -22,7 +19,7 @@ class GameBoard {
   }
 
   generateBoard() {
-    const gameBoardMemo: [number, number][] = [];
+    const gameBoardMemo: twoNumberTuple[] = [];
 
     for (let i = 0; i < this.rows; i++) {
       const arrayRow: CellAbstract[] = [];
@@ -40,7 +37,7 @@ class GameBoard {
 
     for (let i = 0; i < this.bombs; i++) {
       const randomIdx = Math.floor(Math.random() * gameBoardMemo.length);
-      const [xCoor, yCoor]: [number, number] = gameBoardMemo[randomIdx];
+      const [xCoor, yCoor] = gameBoardMemo[randomIdx];
     }
 
     // this.board.flat()
@@ -49,8 +46,10 @@ class GameBoard {
     //   });
   }
 
-  swapCells(newCell: CellAbstract): void {
-
+  swapCells(newCell: CellAbstract, [x, y]: twoNumberTuple): CellAbstract {
+    const oldCell = this.board[y][x]
+    this.board[y][x] = newCell
+    return oldCell
   }
 
   getBoardSize() {
