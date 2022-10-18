@@ -6,8 +6,6 @@ class BombFlagged extends CellAbstract {
   constructor(x: number | null, y: number | null) {
     super(x, y);
     this.type = CellType.BOMB_FLAGGED;
-    this.hasBomb = true;
-    this.isFlagged = true;
     this.style = cellStyles.bombFlagged;
   }
 }

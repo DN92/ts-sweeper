@@ -1,4 +1,4 @@
-import CellAbstract from '../cells/CellAbstract'
+import CellAbstract from '../game/cells/CellAbstract'
 
 type CellConstructor = new(x: number | null, y: number | null ) => CellAbstract
 
@@ -6,7 +6,7 @@ class CellStack{
   size: number
   cellStack: CellAbstract[]
   constructor(cellConstructor: CellConstructor, size: number) {
-    this.size = size
+    this.size = size > -1 ? size : 0
     this.cellStack = new Array(size).fill(new cellConstructor(null, null))
   }
 

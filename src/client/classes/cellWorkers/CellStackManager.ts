@@ -1,14 +1,14 @@
 import CellStack from '../stacksAndStores/CellStack'
-import CellAbstract from '../cells/CellAbstract'
-import BlankFlaggedCell from '../cells/BlankFlaggedCell'
-import BlankHiddenCell from '../cells/BlankHiddenCell';
-import BlankRevealedCell from '../cells/BlankRevealedCell';
-import BombFlaggedCell from '../cells/BombFlaggedCell';
-import BombHiddenCell from '../cells/BombHiddenCell';
-import BombRevealedCell from '../cells/BombRevealedCell';
-import RedBombCell from '../cells/RedBombCell';
-import DefaultCell from '../cells/DefaultCell';
-import CellType from '../cells/cellTypeEnum'
+import CellAbstract from '../game/cells/CellAbstract'
+import BlankFlaggedCell from '../game/cells/BlankFlaggedCell'
+import BlankHiddenCell from '../game/cells/BlankHiddenCell';
+import BlankRevealedCell from '../game/cells/BlankRevealedCell';
+import BombFlaggedCell from '../game/cells/BombFlaggedCell';
+import BombHiddenCell from '../game/cells/BombHiddenCell';
+import BombRevealedCell from '../game/cells/BombRevealedCell';
+import RedBombCell from '../game/cells/RedBombCell';
+import DefaultCell from '../game/cells/DefaultCell';
+import CellType from '../game/cells/cellTypeEnum'
 
 interface sizeOptions {
   blankFlagged: number,

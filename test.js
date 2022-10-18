@@ -1,3 +1,3 @@
-const arr = []
+const arr = [2, 1]
 
-console.log(arr.pop())
+console.log(arr.includes(null))

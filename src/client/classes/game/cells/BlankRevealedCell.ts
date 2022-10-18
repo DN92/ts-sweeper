@@ -6,7 +6,6 @@ class BlankRevealed extends CellAbstract {
   constructor(x: number | null, y: number | null) {
     super(x, y);
     this.type = CellType.BLANK_REVEALED;
-    this.isRevealed = true;
     this.style = cellStyles.blankRevealed;
   }
 }
