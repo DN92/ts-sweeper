@@ -11,10 +11,10 @@ interface Coor {
 
 class CellAbstract {
   coor: Coor;
-  readonly type: CellType
+  type: CellType
   adjBombCount: number;
   hasBeenTried: boolean;
-  readonly style: CellCSSandImage;
+  style: CellCSSandImage;
   constructor(x: number | null, y: number | null) {
     this.coor = { xCoor: x, yCoor: y };
     this.type = CellType.UNSET
