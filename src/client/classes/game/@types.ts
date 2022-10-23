@@ -37,3 +37,15 @@ export enum cellType {
   BOMB_REVEALED = 'bomb-revealed',
   RED_BOMB = 'red-bomb'
 }
+
+export enum gameStatus {
+  READY = 'ready',
+  RUNNING = 'running',
+  WON = 'won',
+  LOST = 'lost'
+}
+
+export interface gameClock {
+  time: string,
+  running: boolean,
+}

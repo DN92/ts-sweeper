@@ -214,7 +214,14 @@ class GameBoard {
     return qualifyingCell
   }
 
+  returnAllBoardCells() {
+    this.board.flat().forEach(cell => {
+      this.memoryManager.returnCell(cell)
+    })
+  }
+
   resetBoard() {
+    this.returnAllBoardCells()
     this.generateBoard()
   }
 }

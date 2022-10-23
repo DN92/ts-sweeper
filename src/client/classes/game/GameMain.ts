@@ -2,13 +2,21 @@ import GameBoard from "./GameBoard";
 import gamePresets from "./gamePresets";
 import CellAbstract from "./cells/CellAbstract";
 import CellType from './cells/cellTypeEnum'
+import { gameStatus, gameClock } from './@types'
 
 class GameMain {
   gameBoard: GameBoard;
   firstMove: boolean;
+  status: gameStatus;
+  clock: gameClock
   constructor() {
     this.gameBoard = new GameBoard(gamePresets.default)
     this.firstMove = true;
+    this.status = gameStatus.READY
+    this.clock = {
+      time: '000',
+      running: false
+    }
   }
 
   checkWon(): boolean {
@@ -19,10 +27,33 @@ class GameMain {
     return this.gameBoard.containsRedBomb()
   }
 
-  getGameStatus(): number {
+  setGameStatus(status: gameStatus): void {
+    this.status = status
+  }
+
+  deriveGameStatus(): number {
     if(this.checkWon()) return 2
     if(this.checkLost()) return -1
     return 1
+  }
+
+  runClock() {
+    this.clock.running = true;
+  }
+
+  stopClock() {
+    this.clock.running = false;
+  }
+
+  resetClock() {
+    this.clock.time = '000'
+    this.clock.running = false;
+  }
+
+  resetGame() {
+    this.gameBoard.resetBoard()
+    this.resetClock()
+    this.status = gameStatus.READY
   }
 
   openCell(gameCell: CellAbstract): void {
