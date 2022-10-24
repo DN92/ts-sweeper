@@ -1,13 +1,13 @@
 import React, { useRef, useState, useReducer, useEffect, useCallback } from 'react';
-import newGame from 'client/classes/game/newGame';
-
-mainGame = newGame
+import game from 'client/classes/game/newGame';
+import GameBoardComponent from './GameBoard';
+import GameMain from "../classes/game/GameMain";
 
 function GameContainer() {
 
   return (
     <div>
-
+      <GameBoardComponent game={game} />
     </div>
   )
 }
