@@ -14,8 +14,8 @@ const defaultSizes: sizeOptions = {
 const gamePresets: presets = {
   small: {
     size: {
-      rows: 9,
-      columns: 9,
+      rows: 3,
+      columns: 7,
     },
     bombs: 10,
     sizeOptions: defaultSizes,

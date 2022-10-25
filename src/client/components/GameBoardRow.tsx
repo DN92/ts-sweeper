@@ -10,7 +10,7 @@ type props = {
 function GameBoardRow({ game, yCoor }: props) {
   return (
     <div>
-      {game.gameBoard.board[yCoor].map((cell, idx) => (
+      {game.gameBoard.board[yCoor].map((_cell, idx) => (
         <GameCell
           key={idx}
           game={game}

@@ -39,16 +39,28 @@ class GameBoard {
         gameBoardMemo.push([i, j]);
       }
     }
+    // console.log('height', this.board.length);
+    // console.log('length', this.board[0].length);
+
     for (let i = 0; i < this.bombs; i++) {
       const randomIdx = Math.floor(Math.random() * gameBoardMemo.length);
-      const [xCoor, yCoor] = gameBoardMemo[randomIdx];
+      const [yCoor, xCoor] = gameBoardMemo[randomIdx];
       this.replaceCell(this.getBoardCell(xCoor, yCoor), CellType.BOMB_HIDDEN);
+      gameBoardMemo.splice(randomIdx, 1);
     }
+
+    // fill rest of cells with blankHidden
+    this.board.flat().forEach((cell) => {
+      if (cell.type === CellType.UNSET) {
+        this.replaceCell(cell, CellType.BLANK_HIDDEN);
+      }
+    });
 
     //  have each cell calculate it's adj bomb value and set
     this.board.flat()
       .forEach((cell) => {
         cell.setAdjBombCount(this.getAdjBombCount(cell));
+        // console.log('cell: ', cell);
       });
   }
 
@@ -139,6 +151,7 @@ class GameBoard {
     }
     const newCell: CellAbstract = this.memoryManager.getCell(newType, [x, y] as [number, number]);
     this.board[y as number][x as number] = newCell;
+    console.log(this.board[y as number][x as number]);
     this.memoryManager.returnCell(oldCell);
   }
 

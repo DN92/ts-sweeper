@@ -12,7 +12,7 @@ class GameMain {
   status: gameStatus;
   clock: gameClock;
   constructor() {
-    this.gameBoard = new GameBoard(gamePresets.default);
+    this.gameBoard = new GameBoard(gamePresets.small);
     this.firstMove = true;
     this.status = gameStatus.READY;
     this.clock = {

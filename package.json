@@ -40,9 +40,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --watch",
     "preview": "vite preview",
-    "linter": "eslint . --ext .ts"
+    "linter": "eslint . --ext .ts",
+    "tsc": "tsc"
   },
   "eslintConfig": {
     "extends": [

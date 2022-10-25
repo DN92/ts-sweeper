@@ -9,6 +9,7 @@ type props = {
 }
 
 function GameCell({ game, xCoor, yCoor }: props) {
+  const cellCoor = `${yCoor}:${xCoor}`;
   const [cell, setCell] = useState<CellAbstract>(game.gameBoard.board[yCoor][xCoor]);
 
   const isRevealed: boolean = useMemo(() => (
@@ -22,12 +23,15 @@ function GameCell({ game, xCoor, yCoor }: props) {
   return (
     <button
       className="game-board-cell"
-      cell-coor={`${xCoor}:${yCoor}`}
+      cell-coor={cellCoor}
       type="button"
+      onClick={() => {
+        console.log('cell: ', cell);
+      }}
     >
       {cell.style.image ? (
         <img
-          cell-coor={`${xCoor}:${yCoor}`}
+          cell-coor={cellCoor}
           src={cell.style.image}
           alt="flag"
         />
@@ -35,13 +39,12 @@ function GameCell({ game, xCoor, yCoor }: props) {
         : (
           <p
             className="game-board-cell-text"
-            cell-coor={`${xCoor}:${yCoor}`}
+            cell-coor={cellCoor}
             style={cell.style.css}
           >
             {isRevealed && adjBombs > 0 ? adjBombs : ''}
           </p>
         )}
-
     </button>
   );
 }

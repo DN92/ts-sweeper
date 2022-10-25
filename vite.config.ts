@@ -1,7 +1,14 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    port: 8000,
+    strictPort: true,
+    open: true,
+    proxy: {
+      '/ts-sweeper': 'http://localhost:8000',
+    },
+  },
 });

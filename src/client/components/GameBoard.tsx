@@ -11,7 +11,7 @@ function GameBoardComponent({ game }:props) {
 
   return (
     <div>
-      {game.gameBoard.board.map((row, idx) => (
+      {game.gameBoard.board.map((_row, idx) => (
         <GameBoardRow
           key={idx}
           game={game}
