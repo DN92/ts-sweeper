@@ -2,18 +2,23 @@ import CellType from './cellTypeEnum';
 import cellStyles from './styleEnums';
 import CellCSSandImage from './CellCSSandImage';
 
+let counter = 1;
+
 interface Coor {
   xCoor: number | null,
   yCoor: number | null,
 }
 
 class CellAbstract {
+  id: number;
   coor: Coor;
   type: CellType;
   adjBombCount: number;
   hasBeenTried: boolean;
   style: CellCSSandImage;
   constructor(x: number | null, y: number | null) {
+    this.id = counter;
+    counter++;
     this.coor = { xCoor: x, yCoor: y };
     this.type = CellType.UNSET;
     this.adjBombCount = -1;

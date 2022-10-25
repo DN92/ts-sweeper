@@ -1,4 +1,3 @@
-import DefaultCell from './cells/DefaultCell';
 import CellAbstract from './cells/CellAbstract';
 import CellStackManager from '../cellWorkers/CellStackManager';
 import CellType from './cells/cellTypeEnum';
@@ -20,6 +19,7 @@ class GameBoard {
     this.board = [];
     this.memoryManager = new CellStackManager(preset.sizeOptions);
     this.generateBoard();
+    console.log('THE BOARD', this.board);
   }
 
   protected generateBoard(): void {
@@ -30,17 +30,9 @@ class GameBoard {
       const arrayRow: CellAbstract[] = [];
       for (let j = 0; j < this.columns; j++) {
         arrayRow.push(this.memoryManager.getCell(CellType.UNSET, [i, j]));
-        console.log(arrayRow[arrayRow.length - 1]);
-      }
-      this.board.push(arrayRow);
-    }
-
-    /*  create a reference array of all indexes in board, randomly pick one,
-     and swap the blank cell with a bomb cell from memory manager */
-    for (let i = 0; i < this.board.length; i++) {
-      for (let j = 0; j < this.board[i].length; j++) {
         gameBoardMemo.push([i, j]);
       }
+      this.board.push(arrayRow);
     }
 
     for (let i = 0; i < this.bombs; i++) {
@@ -150,7 +142,6 @@ class GameBoard {
       throw Error('replaceCell received a null coordinates value and could not complete operations');
     }
     const newCell: CellAbstract = this.memoryManager.getCell(newType, [x, y] as [number, number]);
-    console.log(this.board[0].length);
     this.board[x as number][y as number] = newCell;
     this.memoryManager.returnCell(oldCell);
   }

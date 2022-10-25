@@ -7,7 +7,10 @@ class CellStack {
   cellStack: CellAbstract[];
   constructor(CellConstructor: CellConstructor, size: number) {
     this.size = size > -1 ? size : 0;
-    this.cellStack = new Array(size).fill(new CellConstructor(null, null));
+    this.cellStack = [];
+    while (this.cellStack.length < size) {
+      this.cellStack.push(new CellConstructor(null, null));
+    }
   }
 
   takeCell([x, y]: [number, number]): CellAbstract {
