@@ -4,6 +4,8 @@ import CellStackManager from '../cellWorkers/CellStackManager';
 import CellType from './cells/cellTypeEnum';
 import { gameOption } from './@types';
 
+//  GENERATE CELLS NOT SETTING CELL COORDINATES PROPERLY
+
 
 class GameBoard {
   rows: number;
@@ -27,7 +29,8 @@ class GameBoard {
     for (let i = 0; i < this.rows; i++) {
       const arrayRow: CellAbstract[] = [];
       for (let j = 0; j < this.columns; j++) {
-        arrayRow.push(new DefaultCell(j, i));
+        arrayRow.push(this.memoryManager.getCell(CellType.UNSET, [i, j]));
+        console.log(arrayRow[arrayRow.length - 1]);
       }
       this.board.push(arrayRow);
     }
@@ -39,8 +42,6 @@ class GameBoard {
         gameBoardMemo.push([i, j]);
       }
     }
-    // console.log('height', this.board.length);
-    // console.log('length', this.board[0].length);
 
     for (let i = 0; i < this.bombs; i++) {
       const randomIdx = Math.floor(Math.random() * gameBoardMemo.length);
@@ -60,7 +61,6 @@ class GameBoard {
     this.board.flat()
       .forEach((cell) => {
         cell.setAdjBombCount(this.getAdjBombCount(cell));
-        // console.log('cell: ', cell);
       });
   }
 
@@ -147,11 +147,11 @@ class GameBoard {
   replaceCell(oldCell: CellAbstract, newType: CellType): void | never {
     const [x, y] = oldCell.getCoors();
     if ([x, y].includes(null)) {
-      throw Error('swapCells received a null coordinates value and could not complete operations');
+      throw Error('replaceCell received a null coordinates value and could not complete operations');
     }
     const newCell: CellAbstract = this.memoryManager.getCell(newType, [x, y] as [number, number]);
-    this.board[y as number][x as number] = newCell;
-    console.log(this.board[y as number][x as number]);
+    console.log(this.board[0].length);
+    this.board[x as number][y as number] = newCell;
     this.memoryManager.returnCell(oldCell);
   }
 

@@ -17,6 +17,7 @@ class CellStack {
   }
 
   returnCell(cell: CellAbstract): void {
+    cell.reset();
     this.cellStack.push(cell);
   }
 

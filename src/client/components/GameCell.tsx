@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import GameMain from '../classes/game/GameMain';
 import CellAbstract from '../classes/game/cells/CellAbstract';
 
@@ -20,6 +20,15 @@ function GameCell({ game, xCoor, yCoor }: props) {
     cell.getAdjBombCount()
   ), [cell]);
 
+  const refreshCell = (): void => {
+    setCell(game.gameBoard.board[yCoor][xCoor]);
+  };
+
+  useEffect(() => {
+    // console.log('cell', cell);
+  }, [cell]);
+
+
   return (
     <button
       className="game-board-cell"
@@ -27,6 +36,8 @@ function GameCell({ game, xCoor, yCoor }: props) {
       type="button"
       onClick={() => {
         console.log('cell: ', cell);
+        game.openCell(cell);
+        refreshCell();
       }}
     >
       {cell.style.image ? (
