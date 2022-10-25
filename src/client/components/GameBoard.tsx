@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import GameMain from "../classes/game/GameMain";
+import GameBoardRow from './GameBoardRow'
 
 interface props {
   game: GameMain
@@ -7,12 +8,16 @@ interface props {
 
 function GameBoardComponent({game}:props){
 
-
+///  STOPPED HERE
 
   return (
     <div>
       {game.gameBoard.board.map((row, idx) => (
-        key={idx}
+        <GameBoardRow
+          key={idx}
+          game={game}
+          yCoor={idx}
+        />
       ))}
     </div>
   )

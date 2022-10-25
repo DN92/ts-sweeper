@@ -3,14 +3,23 @@ import GameMain from "../classes/game/GameMain";
 import GameCell from './GameCell'
 
 interface props {
-  game: GameMain
+  game: GameMain,
+  yCoor: number,
+
 }
 
-function GameBoardRow({game}: props) {
+function GameBoardRow({game, yCoor}: props) {
 
   return (
     <div>
-      <GameCell game={game} />
+      {game.gameBoard.board[yCoor].map((cell, idx) => (
+        <GameCell
+          key={idx}
+          game={game}
+          yCoor={yCoor}
+          xCoor={idx}
+        />
+      ))}
     </div>
   )
 }
