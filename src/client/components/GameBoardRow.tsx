@@ -9,7 +9,9 @@ type props = {
 
 function GameBoardRow({ game, yCoor }: props) {
   return (
-    <div>
+    <div
+      className="game-board-row"
+    >
       {game.gameBoard.board[yCoor].map((_cell, idx) => (
         <GameCell
           key={idx}

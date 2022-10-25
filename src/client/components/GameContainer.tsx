@@ -4,7 +4,7 @@ import GameBoardComponent from './GameBoard';
 
 function GameContainer() {
   return (
-    <div>
+    <div className="game-container">
       <GameBoardComponent game={game} />
     </div>
   );
