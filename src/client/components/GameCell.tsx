@@ -1,52 +1,49 @@
-import React, { useMemo } from 'react';
-import GameMain from "../classes/game/GameMain";
-import CellAbstract from '../classes/game/cells/CellAbstract'
+import React, { useState, useMemo } from 'react';
+import GameMain from '../classes/game/GameMain';
+import CellAbstract from '../classes/game/cells/CellAbstract';
 
-interface props {
+type props = {
   game: GameMain,
   yCoor: number,
   xCoor: number,
 }
 
-function GameCell({game, xCoor, yCoor}: props) {
-
-  const cell: CellAbstract = useMemo(() => (
-   game.gameBoard.board[yCoor][xCoor]
-  ), [game.gameBoard.board[yCoor][xCoor]])
+function GameCell({ game, xCoor, yCoor }: props) {
+  const [cell, setCell] = useState<CellAbstract>(game.gameBoard.board[yCoor][xCoor]);
 
   const isRevealed: boolean = useMemo(() => (
     cell.isRevealed()
-  ), [cell])
+  ), [cell]);
 
   const adjBombs: number = useMemo(() => (
     cell.getAdjBombCount()
-  ), [cell])
+  ), [cell]);
 
   return (
-  <button
-    className="game-board-cell"
-    cell-coor={`${xCoor}:${yCoor}`}
-  >
-    {cell.style.image ? (
-      <img
-        cell-coor={`${xCoor}:${yCoor}`}
-        src={cell.style.image}
-      />
-    )
-    :
-    (
-      <p
-        className="game-board-cell-text"
-        cell-coor={`${xCoor}:${yCoor}`}
-        style={cell.style.css}
-      >
-        {isRevealed && adjBombs > 0 ? adjBombs : ''}
-      </p>
-    )
+    <button
+      className="game-board-cell"
+      cell-coor={`${xCoor}:${yCoor}`}
+      type="button"
+    >
+      {cell.style.image ? (
+        <img
+          cell-coor={`${xCoor}:${yCoor}`}
+          src={cell.style.image}
+          alt="flag"
+        />
+      )
+        : (
+          <p
+            className="game-board-cell-text"
+            cell-coor={`${xCoor}:${yCoor}`}
+            style={cell.style.css}
+          >
+            {isRevealed && adjBombs > 0 ? adjBombs : ''}
+          </p>
+        )}
 
-  }
-
-  </button>)
+    </button>
+  );
 }
 
-export default GameCell
+export default GameCell;

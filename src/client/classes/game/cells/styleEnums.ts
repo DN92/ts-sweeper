@@ -1,11 +1,12 @@
+import CellCSSandImage from './CellCSSandImage';
+
 const remSize = 2;
-const remAsString = `${remSize}rem`;
-import CellCSSandImage from "./CellCSSandImage";
+// const remAsString = `${remSize}rem`;
 
 const borderOptions = {
   revealed: `${(remSize * 8) / 100}rem outset #A9A9A9`,
   hidden: `${(remSize * 20) / 100}rem outset #ECECEC`,
-}
+};
 
 enum Background {
   hidden = '#c0c0c0',
@@ -16,6 +17,10 @@ enum Image {
   redFlag = '/images/redFlag.jpg',
   mine = '/images/mine1.jpg',
   redMine = '/images/lastMine.png'
+}
+
+enum ImageAlt {
+  redFlag = 'red flag',
 }
 
 const cellStyles = {
@@ -49,8 +54,8 @@ const cellStyles = {
   redBomb: new CellCSSandImage(
     Background.revealed,
     borderOptions.revealed,
-    Image.redMine
-  )
-}
+    Image.redMine,
+  ),
+};
 
-export default cellStyles
+export default cellStyles;

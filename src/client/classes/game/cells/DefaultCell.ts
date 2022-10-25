@@ -1,5 +1,5 @@
-import CellAbstract from './CellAbstract'
-import cellType from './cellTypeEnum'
+import CellAbstract from './CellAbstract';
+import cellType from './cellTypeEnum';
 import cellStyles from './styleEnums';
 
 class DefaultCell extends CellAbstract {
@@ -10,4 +10,4 @@ class DefaultCell extends CellAbstract {
   }
 }
 
-export default DefaultCell
+export default DefaultCell;

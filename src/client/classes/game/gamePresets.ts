@@ -1,4 +1,4 @@
-import { presets, sizeOptions } from './@types'
+import { presets, sizeOptions } from './@types';
 
 const defaultSizes: sizeOptions = {
   blankFlagged: 81,
@@ -9,7 +9,7 @@ const defaultSizes: sizeOptions = {
   bombRevealed: 81,
   redBombs: 1,
   defaultCells: 81,
-}
+};
 
 const gamePresets: presets = {
   small: {

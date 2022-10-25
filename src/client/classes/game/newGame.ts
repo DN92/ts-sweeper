@@ -1,3 +1,3 @@
-import GameMain from "./GameMain";
+import GameMain from './GameMain';
 
-export default new GameMain()
+export default new GameMain();

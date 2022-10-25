@@ -1,20 +1,22 @@
+import { CSSProperties } from 'react';
+
 const remSize = 2;
 const remAsString = `${remSize}rem`;
 
 class CellCSSandImage {
-  css: React.CSSProperties;
+  css: CSSProperties;
   image?: string;
   constructor(bColor: string, border: string, image?: string) {
     this.css = {
       height: remAsString,
-      width : remAsString,
-      overflow : 'none',
-      boxSizing : 'border-box',
-      background : bColor,
-      border : border,
-    }
-    this.image = image || "";
+      width: remAsString,
+      overflow: 'none',
+      boxSizing: 'border-box',
+      background: bColor,
+      border,
+    };
+    this.image = image || '';
   }
 }
 
-export default CellCSSandImage
+export default CellCSSandImage;

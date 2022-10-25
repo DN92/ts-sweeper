@@ -1,5 +1,5 @@
-import CellAbstract from './CellAbstract'
-import CellType from './cellTypeEnum'
+import CellAbstract from './CellAbstract';
+import CellType from './cellTypeEnum';
 import cellStyles from './styleEnums';
 
 class BombHidden extends CellAbstract {
@@ -7,8 +7,8 @@ class BombHidden extends CellAbstract {
   constructor(x: number | null, y: number | null) {
     super(x, y);
     this.type = CellType.BOMB_HIDDEN;
-    this.style = cellStyles.bombHidden
+    this.style = cellStyles.bombHidden;
   }
 }
 
-export default BombHidden
+export default BombHidden;

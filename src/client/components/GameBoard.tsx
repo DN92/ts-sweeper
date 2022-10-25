@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import GameMain from "../classes/game/GameMain";
-import GameBoardRow from './GameBoardRow'
+import React from 'react';
+import GameMain from '../classes/game/GameMain';
+import GameBoardRow from './GameBoardRow';
 
-interface props {
+type props = {
   game: GameMain
 }
 
-function GameBoardComponent({game}:props){
-
-///  STOPPED HERE
+function GameBoardComponent({ game }:props) {
+  ///  STOPPED HERE
 
   return (
     <div>
@@ -20,7 +19,7 @@ function GameBoardComponent({game}:props){
         />
       ))}
     </div>
-  )
+  );
 }
 
-export default GameBoardComponent
+export default GameBoardComponent;

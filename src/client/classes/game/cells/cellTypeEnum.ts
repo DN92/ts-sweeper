@@ -9,4 +9,4 @@ enum cellType {
   RED_BOMB = 'red-bomb'
 }
 
-export default cellType
+export default cellType;

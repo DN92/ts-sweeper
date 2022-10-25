@@ -1,15 +1,13 @@
-import React, { useMemo } from 'react';
-import GameMain from "../classes/game/GameMain";
-import GameCell from './GameCell'
+import React from 'react';
+import GameMain from '../classes/game/GameMain';
+import GameCell from './GameCell';
 
-interface props {
+type props = {
   game: GameMain,
   yCoor: number,
-
 }
 
-function GameBoardRow({game, yCoor}: props) {
-
+function GameBoardRow({ game, yCoor }: props) {
   return (
     <div>
       {game.gameBoard.board[yCoor].map((cell, idx) => (
@@ -21,7 +19,7 @@ function GameBoardRow({game, yCoor}: props) {
         />
       ))}
     </div>
-  )
+  );
 }
 
-export default GameBoardRow
+export default GameBoardRow;

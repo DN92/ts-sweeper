@@ -1,5 +1,5 @@
-import CellAbstract from './CellAbstract'
-import CellType from './cellTypeEnum'
+import CellAbstract from './CellAbstract';
+import CellType from './cellTypeEnum';
 import cellStyles from './styleEnums';
 
 class BombRevealed extends CellAbstract {
@@ -10,4 +10,4 @@ class BombRevealed extends CellAbstract {
   }
 }
 
-export default BombRevealed
+export default BombRevealed;

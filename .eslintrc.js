@@ -28,8 +28,7 @@ module.exports = {
     'import',
     '@typescript-eslint',
   ],
-  'no-useless-constructor': 'off',
-  '@typescript-eslint/no-useless-constructor': 'warn',
+
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
@@ -40,6 +39,8 @@ module.exports = {
     'react/prop-types': 0,
     'object-curly-newline': 0,
     'no-console': ['error', { allow: ['log', 'warn', 'error'] }],
+    'no-useless-constructor': 'warn',
+    '@typescript-eslint/no-useless-constructor': 'warn',
     'react/no-unknown-property': [1, { ignore: ['cell-coor'] }],
     'no-plusplus': 0,
     'no-use-before-define': 0,
