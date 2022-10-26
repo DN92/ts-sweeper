@@ -36,12 +36,14 @@ function GameCell({ game, xCoor, yCoor }: props) {
       style={cell.style.css}
       type="button"
       onClick={() => {
-        console.log('cell: ', cell);
+        // console.log('cell: ', cell);
         // game.openCell(cell);
         // refreshCell();
+        console.log('current cell', cell.getCoors());
+        console.log('adj cells: ', game.gameBoard.getAdjCells(cell));
       }}
     >
-      {cell.style.image ? (
+      {/* {cell.style.image ? (
         <img
           cell-coor={cellCoor}
           src={cell.style.image}
@@ -55,7 +57,8 @@ function GameCell({ game, xCoor, yCoor }: props) {
           >
             {isRevealed && adjBombs > 0 ? adjBombs : ''}
           </p>
-        )}
+        )} */}
+      {cell.hasBomb() ? -1 : cell.getAdjBombCount() }
     </button>
   );
 }

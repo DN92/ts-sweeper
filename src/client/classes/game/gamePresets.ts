@@ -17,7 +17,7 @@ const gamePresets: presets = {
       rows: 3,
       columns: 7,
     },
-    bombs: 10,
+    bombs: 3,
     sizeOptions: defaultSizes,
   },
   medium: {

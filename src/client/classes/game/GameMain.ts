@@ -59,6 +59,10 @@ class GameMain {
   }
 
   openCell(gameCell: CellAbstract): void {
+    if (![gameStatus.READY, gameStatus.RUNNING].includes(this.status)) {
+      console.warn('game is not ready or running, cells cannot be opened');
+    }
+
     const openBombCell = (): void => {
       if (this.firstMove) {
         this.firstMove = false;
@@ -67,14 +71,15 @@ class GameMain {
       } else {
         //  else place the red bomb & game over signal
         this.gameBoard.replaceCell(gameCell, CellType.RED_BOMB);
+        this.setGameStatus(gameStatus.LOST);
       }
-      gameCell.setTried();
+      gameCell.setTriedTrue();
       this.firstMove = false;
     };
 
     const openHiddenCell = (): void => {
       this.firstMove = false;
-      gameCell.setTried();
+      gameCell.setTriedTrue();
       this.gameBoard.handleRevealing(gameCell);
       if (gameCell.getAdjBombCount() === 0) {
         this.gameBoard.getAdjCells(gameCell).forEach((cell) => {
@@ -85,7 +90,7 @@ class GameMain {
 
     const openRevealedCell = (): void => {
       this.firstMove = false;
-      gameCell.setTried();
+      gameCell.setTriedTrue();
       const adjFlags = this.gameBoard.getAdjFlagCount(gameCell);
       if (!(adjFlags === gameCell.getAdjBombCount())) return;
       const adjCells = this.gameBoard.getAdjCells(gameCell);
@@ -99,15 +104,15 @@ class GameMain {
     if (gameCell.isFlagged()) return;
     if (gameCell.hasBomb()) {
       openBombCell();
-      return;
+      // return;
     }
-    if (gameCell.isHidden()) {
-      openHiddenCell();
-      return;
-    }
-    if (gameCell.isRevealed()) {
-      openRevealedCell();
-    }
+    // if (gameCell.isHidden()) {
+    //   openHiddenCell();
+    //   return;
+    // }
+    // if (gameCell.isRevealed()) {
+    //   openRevealedCell();
+    // }
   }
 }
 

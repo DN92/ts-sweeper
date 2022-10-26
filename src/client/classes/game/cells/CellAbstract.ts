@@ -30,11 +30,49 @@ class CellAbstract {
     return this.adjBombCount;
   }
 
-  isRevealed(): boolean {
+
+  getCoors(): [number | null, number | null] {
+    return [this.coor.xCoor, this.coor.yCoor];
+  }
+
+  getTried(): boolean {
+    return this.hasBeenTried;
+  }
+
+  getType(): CellType {
+    return this.type;
+  }
+
+  setAdjBombCount(bombs: number): void {
+    this.adjBombCount = bombs;
+  }
+
+  setCoor(x: number, y: number): void {
+    this.coor.xCoor = x;
+    this.coor.yCoor = y;
+  }
+
+  setTried(bool: boolean): void {
+    this.hasBeenTried = bool;
+  }
+
+  setTriedTrue(): void {
+    this.hasBeenTried = true;
+  }
+
+  hasBomb(): boolean {
     return [
-      CellType.BLANK_REVEALED,
+      CellType.BOMB_FLAGGED,
+      CellType.BOMB_HIDDEN,
       CellType.BOMB_REVEALED,
       CellType.RED_BOMB,
+    ].includes(this.type);
+  }
+
+  isFlagged(): boolean {
+    return [
+      CellType.BLANK_FLAGGED,
+      CellType.BOMB_FLAGGED,
     ].includes(this.type);
   }
 
@@ -48,55 +86,28 @@ class CellAbstract {
     ].includes(this.type);
   }
 
-  isFlagged(): boolean {
+  isRevealed(): boolean {
     return [
-      CellType.BLANK_FLAGGED,
-      CellType.BOMB_FLAGGED,
-    ].includes(this.type);
-  }
-
-  hasBomb(): boolean {
-    return [
-      CellType.BOMB_FLAGGED,
-      CellType.BOMB_HIDDEN,
+      CellType.BLANK_REVEALED,
       CellType.BOMB_REVEALED,
       CellType.RED_BOMB,
     ].includes(this.type);
-  }
-
-  isTried(): boolean {
-    return this.hasBeenTried;
-  }
-
-  getType(): CellType {
-    return this.type;
-  }
-
-  getCoors(): [number | null, number | null] {
-    return [this.coor.xCoor, this.coor.yCoor];
-  }
-
-  setAdjBombCount(bombs: number): void {
-    this.adjBombCount = bombs;
-  }
-
-  setCoor(x: number, y: number): void {
-    this.coor.xCoor = x;
-    this.coor.yCoor = y;
-  }
-
-  setTried(): void {
-    this.hasBeenTried = true;
   }
 
   isSafe(): boolean {
     return !this.hasBomb();
   }
 
+  isTried(): boolean {
+    return this.hasBeenTried;
+  }
+
   adoptProps(otherCell: CellAbstract): void {
-    this.adjBombCount = otherCell.adjBombCount;
-    this.coor = otherCell.coor;
-    this.hasBeenTried = otherCell.hasBeenTried;
+    console.log('ADOPT PROPS PRE!', this, otherCell);
+    this.setAdjBombCount(otherCell.getAdjBombCount());
+    this.setCoor(...otherCell.getCoors() as [number, number]);
+    this.setTried(otherCell.getTried());
+    console.log('ADOPT PROPS POST!', this, otherCell);
   }
 
   reset(): void {
