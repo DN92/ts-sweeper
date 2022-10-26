@@ -33,6 +33,7 @@ function GameCell({ game, xCoor, yCoor }: props) {
     <button
       className="game-board-cell"
       cell-coor={cellCoor}
+      style={cell.style.css}
       type="button"
       onClick={() => {
         console.log('cell: ', cell);
@@ -51,7 +52,6 @@ function GameCell({ game, xCoor, yCoor }: props) {
           <p
             className="game-board-cell-text"
             cell-coor={cellCoor}
-            style={cell.style.css}
           >
             {isRevealed && adjBombs > 0 ? adjBombs : ''}
           </p>

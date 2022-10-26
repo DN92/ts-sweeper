@@ -14,6 +14,7 @@ class CellCSSandImage {
       boxSizing: 'border-box',
       background: bColor,
       border,
+      objectFit: 'contain',
     };
     this.image = image || '';
   }
