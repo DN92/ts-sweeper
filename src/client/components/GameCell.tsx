@@ -37,8 +37,8 @@ function GameCell({ game, xCoor, yCoor }: props) {
       type="button"
       onClick={() => {
         console.log('cell: ', cell);
-        game.openCell(cell);
-        refreshCell();
+        // game.openCell(cell);
+        // refreshCell();
       }}
     >
       {cell.style.image ? (

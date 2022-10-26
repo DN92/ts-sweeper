@@ -3,9 +3,6 @@ import CellStackManager from '../cellWorkers/CellStackManager';
 import CellType from './cells/cellTypeEnum';
 import { gameOption } from './@types';
 
-//  GENERATE CELLS NOT SETTING CELL COORDINATES PROPERLY
-
-
 class GameBoard {
   rows: number;
   columns: number;
@@ -50,10 +47,11 @@ class GameBoard {
     });
 
     //  have each cell calculate it's adj bomb value and set
-    this.board.flat()
-      .forEach((cell) => {
-        cell.setAdjBombCount(this.getAdjBombCount(cell));
-      });
+    this.board.flat().forEach((cell) => {
+      cell.setAdjBombCount(this.getAdjBombCount(cell));
+    });
+
+    console.log('after gen', this.board);
   }
 
   getBoardSize(): number {
@@ -142,6 +140,7 @@ class GameBoard {
       throw Error('replaceCell received a null coordinates value and could not complete operations');
     }
     const newCell: CellAbstract = this.memoryManager.getCell(newType, [x, y] as [number, number]);
+    // newCell.adoptProps(oldCell);
     this.board[x as number][y as number] = newCell;
     this.memoryManager.returnCell(oldCell);
   }
@@ -181,6 +180,8 @@ class GameBoard {
   }
 
   swapCells(cell1: CellAbstract, cell2: CellAbstract): void {
+    console.log('cell 1 coor', cell1.getCoors);
+    console.log('cell 2 coor', cell2.getCoors);
     const [x1, y1] = cell1.getCoors();
     const [x2, y2] = cell2.getCoors();
     const tempCell = this.memoryManager.getCell(CellType.UNSET, [x1 as number, y1 as number]);

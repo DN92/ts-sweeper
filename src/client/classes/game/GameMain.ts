@@ -59,7 +59,7 @@ class GameMain {
   }
 
   openCell(gameCell: CellAbstract): void {
-    const openBombCell = (gameCell: CellAbstract): void => {
+    const openBombCell = (): void => {
       if (this.firstMove) {
         this.firstMove = false;
         gameCell = this.gameBoard.swapOutBomb(gameCell); // swapOutBomb returns the new cell
@@ -72,7 +72,7 @@ class GameMain {
       this.firstMove = false;
     };
 
-    const openHiddenCell = (gameCell: CellAbstract): void => {
+    const openHiddenCell = (): void => {
       this.firstMove = false;
       gameCell.setTried();
       this.gameBoard.handleRevealing(gameCell);
@@ -83,7 +83,7 @@ class GameMain {
       }
     };
 
-    const openRevealedCell = (gameCell: CellAbstract): void => {
+    const openRevealedCell = (): void => {
       this.firstMove = false;
       gameCell.setTried();
       const adjFlags = this.gameBoard.getAdjFlagCount(gameCell);
@@ -98,15 +98,15 @@ class GameMain {
     //  if flagged, do nothing
     if (gameCell.isFlagged()) return;
     if (gameCell.hasBomb()) {
-      openBombCell(gameCell);
+      openBombCell();
       return;
     }
     if (gameCell.isHidden()) {
-      openHiddenCell(gameCell);
+      openHiddenCell();
       return;
     }
     if (gameCell.isRevealed()) {
-      openRevealedCell(gameCell);
+      openRevealedCell();
     }
   }
 }
