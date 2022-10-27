@@ -104,15 +104,15 @@ class GameMain {
     if (gameCell.isFlagged()) return;
     if (gameCell.hasBomb()) {
       openBombCell();
-      // return;
+      return;
     }
-    // if (gameCell.isHidden()) {
-    //   openHiddenCell();
-    //   return;
-    // }
-    // if (gameCell.isRevealed()) {
-    //   openRevealedCell();
-    // }
+    if (gameCell.isHidden()) {
+      openHiddenCell();
+      return;
+    }
+    if (gameCell.isRevealed()) {
+      openRevealedCell();
+    }
   }
 }
 

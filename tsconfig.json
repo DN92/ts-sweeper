@@ -21,11 +21,12 @@
     "jsx": "react-jsx",
     "watch": true,
     "outDir": "dist/",
-    "baseUrl": "src/"
+    "baseUrl": "src/",
+    "types": ["vitest/globals"]
   },
   "include":[
       "src"
-   ],
+, "testStuff"   ],
    "exclude":[
       "node_modules",
    ],

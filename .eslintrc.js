@@ -1,6 +1,6 @@
 module.exports = {
-  "root": true,
-  "parser": "@typescript-eslint/parser",
+  root: true,
+  parser: '@typescript-eslint/parser',
 
   env: {
     browser: true,
@@ -65,6 +65,7 @@ module.exports = {
       },
     ],
     'lines-between-class-members': 0,
+    'import/no-unresolved': 1,
   },
   settings: {
     'import/resolver': {

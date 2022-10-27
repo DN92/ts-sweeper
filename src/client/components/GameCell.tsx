@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import GameMain from '../classes/game/GameMain';
 import CellAbstract from '../classes/game/cells/CellAbstract';
+import useClickTracker from '../hooks/useClickTracker';
 
 type props = {
   game: GameMain,
@@ -9,25 +10,18 @@ type props = {
 }
 
 function GameCell({ game, xCoor, yCoor }: props) {
+  const [clickTracker, checkMouseDown, checkMouseUp, resetClickTracker] = useClickTracker();
+
   const cellCoor = `${yCoor}:${xCoor}`;
   const [cell, setCell] = useState<CellAbstract>(game.gameBoard.board[yCoor][xCoor]);
-
-  const isRevealed: boolean = useMemo(() => (
-    cell.isRevealed()
-  ), [cell]);
-
-  const adjBombs: number = useMemo(() => (
-    cell.getAdjBombCount()
-  ), [cell]);
 
   const refreshCell = (): void => {
     setCell(game.gameBoard.board[yCoor][xCoor]);
   };
 
-  useEffect(() => {
-    // console.log('cell', cell);
-  }, [cell]);
-
+  // useEffect(() => {
+  //   console.log('cell', cell);
+  // }, [cell]);
 
   return (
     <button
@@ -36,14 +30,13 @@ function GameCell({ game, xCoor, yCoor }: props) {
       style={cell.style.css}
       type="button"
       onClick={() => {
-        // console.log('cell: ', cell);
+        console.log('cell: ', cell.getAdjBombCount());
         // game.openCell(cell);
         // refreshCell();
-        console.log('current cell', cell.getCoors());
-        console.log('adj cells: ', game.gameBoard.getAdjCells(cell));
+        // console.log('baord, ', game.gameBoard.board.flat().map((cell) => cell.adjBombCount));
       }}
     >
-      {/* {cell.style.image ? (
+      {cell.style.image ? (
         <img
           cell-coor={cellCoor}
           src={cell.style.image}
@@ -55,10 +48,11 @@ function GameCell({ game, xCoor, yCoor }: props) {
             className="game-board-cell-text"
             cell-coor={cellCoor}
           >
-            {isRevealed && adjBombs > 0 ? adjBombs : ''}
+            {(cell.isRevealed() && cell.getAdjBombCount() > 0) ? cell.getAdjBombCount() : '-1'}
           </p>
-        )} */}
-      {cell.hasBomb() ? -1 : cell.getAdjBombCount() }
+        )}
+
+      {/* {cell.hasBomb() ? <img src="public/images/mine1.jpg" alt="bomb" /> : cell.getAdjBombCount() } */}
     </button>
   );
 }

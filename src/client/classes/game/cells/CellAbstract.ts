@@ -103,11 +103,9 @@ class CellAbstract {
   }
 
   adoptProps(otherCell: CellAbstract): void {
-    console.log('ADOPT PROPS PRE!', this, otherCell);
     this.setAdjBombCount(otherCell.getAdjBombCount());
     this.setCoor(...otherCell.getCoors() as [number, number]);
     this.setTried(otherCell.getTried());
-    console.log('ADOPT PROPS POST!', this, otherCell);
   }
 
   reset(): void {

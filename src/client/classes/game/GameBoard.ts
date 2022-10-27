@@ -16,7 +16,6 @@ class GameBoard {
     this.board = [];
     this.memoryManager = new CellStackManager(preset.sizeOptions);
     this.generateBoard();
-    console.log('THE BOARD', this.board);
   }
 
   protected generateBoard(): void {
@@ -37,8 +36,6 @@ class GameBoard {
       const randomIdx = Math.floor(Math.random() * gameBoardMemo.length);
       const [yCoor, xCoor] = gameBoardMemo[randomIdx];
       this.replaceCell(this.getBoardCell(xCoor, yCoor), CellType.BOMB_HIDDEN);
-      console.log('created a bomb! ', bombsCreated, ' have been created');
-      console.log('bomb locations is : ', gameBoardMemo[randomIdx]);
       gameBoardMemo.splice(randomIdx, 1);
     }
 
@@ -53,8 +50,6 @@ class GameBoard {
     this.board.flat().forEach((cell) => {
       cell.setAdjBombCount(this.getAdjBombCount(cell));
     });
-
-    console.log('after gen', this.board);
   }
 
   getBoardSize(): number {
@@ -109,10 +104,6 @@ class GameBoard {
     possibleCells.forEach(([x, y]) => {
       if (!this.board[y] || !this.board[y][x]) return;
       adjCells.push(this.board[y][x]);
-    });
-    console.log('adj cells:');
-    adjCells.forEach((cell) => {
-      console.log(cell.getCoors());
     });
     return adjCells;
   }
@@ -170,7 +161,7 @@ class GameBoard {
   }
 
   handleRevealing(cell: CellAbstract): void {
-    function getOpposite(inputType: CellType): CellType {
+    function getOppositeType(inputType: CellType): CellType {
       const transitions: Partial<Record<CellType, CellType>> = {
         [CellType.BLANK_FLAGGED]: CellType.BLANK_FLAGGED,
         [CellType.BLANK_HIDDEN]: CellType.BLANK_REVEALED,
@@ -183,11 +174,10 @@ class GameBoard {
       };
       return transitions[inputType] as CellType;
     }
-    this.replaceCell(cell, getOpposite(cell.type));
+    this.replaceCell(cell, getOppositeType(cell.type));
   }
 
   swapCells(cell1: CellAbstract, cell2: CellAbstract): void {
-    console.log('SWAP CELLS, cell1 , cell2', Object.freeze({ ...cell1 }), Object.freeze({ ...cell2 }));
     const [x1, y1] = cell1.getCoors();
     const [x2, y2] = cell2.getCoors();
     const tempCell = this.memoryManager.getCell(CellType.UNSET, [x1 as number, y1 as number]);
@@ -197,7 +187,6 @@ class GameBoard {
     this.board[y1 as number][x1 as number] = cell2;
     this.board[y2 as number][x2 as number] = cell1;
     tempCell.reset();
-    console.log('SWAP CELLS, cell1 , cell2', Object.freeze({ ...cell1 }), Object.freeze({ ...cell2 }));
     this.memoryManager.returnCell(tempCell);
   }
 
