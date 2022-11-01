@@ -90,46 +90,46 @@ class CellStackManager {
   fillStack(cellType: string): void {
     switch (cellType) {
     case CellType.BLANK_HIDDEN:
-      return this.blankHiddenCellStack.fillStore();
+      return this.blankHiddenCellStack.fillStack();
     case CellType.BLANK_FLAGGED:
-      return this.blankFlaggedCellStack.fillStore();
+      return this.blankFlaggedCellStack.fillStack();
     case CellType.BLANK_REVEALED:
-      return this.blankRevealedCellStack.fillStore();
+      return this.blankRevealedCellStack.fillStack();
     case CellType.BOMB_HIDDEN:
-      return this.bombHiddenCellStack.fillStore();
+      return this.bombHiddenCellStack.fillStack();
     case CellType.BOMB_FLAGGED:
-      return this.bombFlaggedCellStack.fillStore();
+      return this.bombFlaggedCellStack.fillStack();
     case CellType.BOMB_REVEALED:
-      return this.bombRevealedCellStack.fillStore();
+      return this.bombRevealedCellStack.fillStack();
     case CellType.RED_BOMB:
-      return this.redBombCellStack.fillStore();
+      return this.redBombCellStack.fillStack();
     case CellType.UNSET:
-      return this.defaultCellStack.fillStore();
+      return this.defaultCellStack.fillStack();
     default:
-      return this.defaultCellStack.fillStore();
+      return this.defaultCellStack.fillStack();
     }
   }
 
   emptyStack(cellType: string): void {
     switch (cellType) {
     case CellType.BLANK_HIDDEN:
-      return this.blankHiddenCellStack.emptyStore();
+      return this.blankHiddenCellStack.emptyStack();
     case CellType.BLANK_FLAGGED:
-      return this.blankFlaggedCellStack.emptyStore();
+      return this.blankFlaggedCellStack.emptyStack();
     case CellType.BLANK_REVEALED:
-      return this.blankRevealedCellStack.emptyStore();
+      return this.blankRevealedCellStack.emptyStack();
     case CellType.BOMB_HIDDEN:
-      return this.bombHiddenCellStack.emptyStore();
+      return this.bombHiddenCellStack.emptyStack();
     case CellType.BOMB_FLAGGED:
-      return this.bombFlaggedCellStack.emptyStore();
+      return this.bombFlaggedCellStack.emptyStack();
     case CellType.BOMB_REVEALED:
-      return this.bombRevealedCellStack.emptyStore();
+      return this.bombRevealedCellStack.emptyStack();
     case CellType.RED_BOMB:
-      return this.redBombCellStack.emptyStore();
+      return this.redBombCellStack.emptyStack();
     case CellType.UNSET:
-      return this.defaultCellStack.emptyStore();
+      return this.defaultCellStack.emptyStack();
     default:
-      return this.defaultCellStack.emptyStore();
+      return this.defaultCellStack.emptyStack();
     }
   }
 }

@@ -4,34 +4,40 @@ type CellConstructor = new(x: number | null, y: number | null) => CellAbstract
 
 class CellStack {
   size: number;
-  cellStack: CellAbstract[];
-  constructor(CellConstructor: CellConstructor, size: number) {
+  stack: CellAbstract[];
+  CellConstructor: CellConstructor;
+  constructor(Constructor: CellConstructor, size: number) {
+    this.CellConstructor = Constructor;
     this.size = size > -1 ? size : 0;
-    this.cellStack = [];
-    while (this.cellStack.length < size) {
-      this.cellStack.push(new CellConstructor(null, null));
+    this.stack = [];
+    while (this.stack.length < size) {
+      this.stack.push(new Constructor(null, null));
     }
   }
 
   takeCell([x, y]: [number, number]): CellAbstract {
-    const cell: CellAbstract | undefined = this.cellStack.pop();
+    const cell: CellAbstract | undefined = this.stack.pop();
     if (cell) cell.setCoor(x, y);
-    return cell || new CellAbstract(x, y);
+    return cell || new this.CellConstructor(x, y);
+  }
+
+  addCell(): void {
+    this.stack.push(new this.CellConstructor(null, null));
   }
 
   returnCell(cell: CellAbstract): void {
     cell.reset();
-    this.cellStack.push(cell);
+    this.stack.push(cell);
   }
 
-  fillStore(): void {
-    while (this.cellStack.length < this.size) {
-      this.cellStack.push(new CellAbstract(null, null));
+  fillStack(): void {
+    while (this.stack.length < this.size) {
+      this.stack.push(new CellAbstract(null, null));
     }
   }
 
-  emptyStore(): void {
-    this.cellStack = [];
+  emptyStack(): void {
+    this.stack = [];
   }
 }
 

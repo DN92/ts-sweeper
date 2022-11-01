@@ -48,8 +48,8 @@
     "linter": "eslint . --ext .ts",
     "tsc": "tsc",
     "vitest": "vitest",
-    "vitest coverage": "vitest run --coverage",
-    "vitest ui": "vitest --ui"
+    "vitest coverage": "vitest --coverage",
+    "vitest:ui": "vitest --ui"
   },
   "eslintConfig": {
     "extends": [

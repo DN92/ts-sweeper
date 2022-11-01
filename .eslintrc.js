@@ -66,6 +66,8 @@ module.exports = {
     ],
     'lines-between-class-members': 0,
     'import/no-unresolved': 1,
+    'no-loop-func': 0,
+    'operator-linebreak': 0,
   },
   settings: {
     'import/resolver': {
