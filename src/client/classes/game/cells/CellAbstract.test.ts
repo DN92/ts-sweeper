@@ -7,7 +7,6 @@ function createCellNullNull(): CellAbstract {
   return new CellAbstract(null, null);
 }
 
-
 describe('CellAbstract', () => {
   test('instance correctly initiated (TESTS PRELOAD)', () => {
     const cell = new CellAbstract(null, null);
@@ -49,6 +48,19 @@ describe('CellAbstract', () => {
   test('getType method', () => {
     const cell = createCellNullNull();
     expect(cell.getType()).toBe(CellType.UNSET);
+  });
+
+  test('getCoorAsNumbers', () => {
+    const failureArr = [
+      [null, null],
+      [1, null],
+      [null, 1],
+      [-1, 5],
+      [5, -1],
+    ];
+    const passArr = [
+      [],
+    ];
   });
 
   test('reset method', () => {

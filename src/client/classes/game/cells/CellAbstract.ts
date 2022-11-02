@@ -30,9 +30,19 @@ class CellAbstract {
     return this.adjBombCount;
   }
 
-
   getCoors(): [number | null, number | null] {
     return [this.coor.xCoor, this.coor.yCoor];
+  }
+
+  getCoorsAsNumbers(): [number, number] | never {
+    // the point of this function is strictly to type switch and remove the nulls
+    // we do this here once instead of constantly needing to 'as' everywhere else
+    if (!this.hasCoordinates()) throw Error('getCoorsAsNumber received null or undefined value');
+    const [x, y] = this.getCoors() as [number, number];
+    [x, y].forEach((val) => {
+      if (val < 0) throw Error('input numbers cannot be negative');
+    });
+    return [this.coor.xCoor as number, this.coor.yCoor as number];
   }
 
   getTried(): boolean {
@@ -67,6 +77,13 @@ class CellAbstract {
       CellType.BOMB_REVEALED,
       CellType.RED_BOMB,
     ].includes(this.type);
+  }
+
+  hasCoordinates(): boolean {
+    const { xCoor, yCoor } = this.coor;
+    if ([xCoor, yCoor].includes(null)) return false;
+    // return (!!xCoor || xCoor === 0) && (!!yCoor || yCoor === 0);
+    return xCoor as number > -1 && yCoor as number > -1;
   }
 
   isFlagged(): boolean {
