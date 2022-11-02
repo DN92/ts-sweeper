@@ -9,6 +9,16 @@ import { TestFunction, TestOptions } from 'vitest';
 import GameBoard from './GameBoard';
 import CellType from './cells/cellTypeEnum';
 import CellAbstract from './cells/CellAbstract';
+import CellStack from '../stacksAndStores/CellStack';
+import BlankFlaggedCell from './cells/BlankFlaggedCell';
+import BlankHiddenCell from './cells/BlankHiddenCell';
+import BlankRevealedCell from './cells/BlankRevealedCell';
+import BombFlaggedCell from './cells/BombFlaggedCell';
+import BombHiddenCell from './cells/BombHiddenCell';
+import BombRevealedCell from './cells/BombRevealedCell';
+import RedBombCell from './cells/RedBombCell';
+import DefaultCell from './cells/DefaultCell';
+
 
 type Test = (name: string, fn: TestFunction, timeout?: number | TestOptions) => void
 
@@ -30,9 +40,37 @@ const smallGamePreset = {
   },
 };
 
+const cellTypes = [
+  CellType.UNSET,
+  CellType.BLANK_HIDDEN,
+  CellType.BLANK_FLAGGED,
+  CellType.BLANK_REVEALED,
+  CellType.BOMB_HIDDEN,
+  CellType.BOMB_FLAGGED,
+  CellType.BOMB_REVEALED,
+  CellType.RED_BOMB,
+];
+
 function createSmallGameBoard() {
-  return new GameBoard(smallGamePreset);
+  const gameBoard = new GameBoard(smallGamePreset);
+  console.log('running');
+  return gameBoard;
 }
+
+describe('create small game board test settup function', () => {
+  const { board } = createSmallGameBoard();
+  test('board has correct dimensions', () => {
+    expect(board.length).toBe(3);
+    board.forEach((row) => {
+      expect(row.length).toBe(7);
+    });
+  });
+  test('board axises are correctly inverted when trying to access indexes directly', () => {
+    expect(board[0][0]).toBeDefined();
+    expect(board[7 - 1]).toBeUndefined();
+    expect(board[3 - 1][7 - 1]).toBeDefined();
+  });
+});
 
 describe('Gameboard', () => {
   describe('generate board function', () => {
@@ -119,11 +157,43 @@ describe('Gameboard', () => {
     });
   });
 
+  test('each element of board should be a Cell', () => {
+    const gameBoard = createSmallGameBoard();
+    const { board } = gameBoard;
+    expect(board.flat().every((cell) => cell instanceof CellAbstract)).toBe(true);
+  });
+
   describe('replaceCell function', () => {
     const gameBoard = createSmallGameBoard();
     const { board } = gameBoard;
-    test('each element of board should be a Cell', () => {
-      board.flat().every((cell) => cell instanceof CellAbstract);
+    const indexX = 1;
+    const indexY = 2;
+    const testerArr1 = [
+      [1, null],
+      [null, 1],
+      [null, null],
+    ];
+    const testerArr2 = [
+      [0, 1],
+      [1, 2],
+      [2, 3],
+    ];
+    test('if old cell does not have set coordinates, throws an error', () => {
+      // testerArr1.forEach((tester) => {
+      //   expect(() => gameBoard.replaceCell(new CellAbstract(...tester), new CellAbstract(...tester)))
+      //     .toThrowError('could not complete');
+      // });
     });
+    // test('replace cell replaces chosen cell with correct type and index', () => {
+    //   expect(cellTypes.length).toBeGreaterThan(0);
+    //   cellTypes.forEach((type) => {
+    //     gameBoard.replaceCell(board[indexY][indexX], type);
+    //     expect(board[indexY][indexX].type).toBe(type);
+    //     testerArr2.forEach(([xIdx, yIdx]) => {
+    //       gameBoard.replaceCell(board[yIdx][xIdx], type);
+    //       expect(board[xIdx][yIdx].coor).toEqual({ xCoor: xIdx, yCoor: yIdx });
+    //     });
+    //   });
+    // });
   });
 });

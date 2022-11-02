@@ -30,7 +30,7 @@ function GameCell({ game, xCoor, yCoor }: props) {
       style={cell.style.css}
       type="button"
       onClick={() => {
-        console.log('cell: ', cell.getAdjBombCount());
+        // console.log('cell: ', cell.getAdjBombCount());
         // game.openCell(cell);
         // refreshCell();
         // console.log('baord, ', game.gameBoard.board.flat().map((cell) => cell.adjBombCount));

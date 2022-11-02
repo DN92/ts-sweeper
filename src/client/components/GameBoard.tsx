@@ -13,7 +13,7 @@ function GameBoardComponent({ game }:props) {
   const [currentCell, setCurrentCell] = useState<CellAbstract | null>(null);
 
   const handleMouseOver = (event: MouseEvent<HTMLDivElement> | FocusEvent<HTMLDivElement>) => {
-    console.log(event);
+    // console.log(event);
 
     // if (event.target.getAttribute('cell-coor')) {
     //   const [x, y] = event.target.getAttribute('cell-coor').split(':');

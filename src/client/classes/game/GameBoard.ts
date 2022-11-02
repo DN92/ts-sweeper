@@ -16,40 +16,44 @@ class GameBoard {
     this.board = [];
     this.memoryManager = new CellStackManager(preset.sizeOptions);
     this.generateBoard();
+    console.log('generation completed');
+    console.log('GAMEBOARD: ', this.board);
   }
 
   protected generateBoard(): void {
     const gameBoardMemo: [number, number][] = [];
-    const bombsCreated = 0;
 
     // fill 2d array with blank game cells and fill up memo object
     for (let i = 0; i < this.rows; i++) {
       const arrayRow: CellAbstract[] = [];
       for (let j = 0; j < this.columns; j++) {
+        console.log(j);
         arrayRow.push(this.memoryManager.getCell(CellType.UNSET, [j, i]));
         gameBoardMemo.push([j, i]);
       }
       this.board.push(arrayRow);
     }
 
+    // console.log('MEMO ', gameBoardMemo);
+
     for (let i = 0; i < this.bombs; i++) {
       const randomIdx = Math.floor(Math.random() * gameBoardMemo.length);
-      const [yCoor, xCoor] = gameBoardMemo[randomIdx];
+      const [xCoor, yCoor] = gameBoardMemo[randomIdx];
       this.replaceCell(this.getBoardCell(xCoor, yCoor), CellType.BOMB_HIDDEN);
       gameBoardMemo.splice(randomIdx, 1);
     }
 
-    // fill rest of cells with blankHidden
-    this.board.flat().forEach((cell) => {
-      if (cell.type === CellType.UNSET) {
-        this.replaceCell(cell, CellType.BLANK_HIDDEN);
-      }
-    });
+    // // fill rest of cells with blankHidden
+    // this.board.flat().forEach((cell) => {
+    //   if (cell.type === CellType.UNSET) {
+    //     this.replaceCell(cell, CellType.BLANK_HIDDEN);
+    //   }
+    // });
 
-    //  have each cell calculate it's adj bomb value and set
-    this.board.flat().forEach((cell) => {
-      cell.setAdjBombCount(this.getAdjBombCount(cell));
-    });
+    // //  have each cell calculate it's adj bomb value and set
+    // this.board.flat().forEach((cell) => {
+    //   cell.setAdjBombCount(this.getAdjBombCount(cell));
+    // });
   }
 
   getBoardSize(): number {
@@ -57,7 +61,7 @@ class GameBoard {
   }
 
   getBoardCell(xCoor: number, yCoor: number): CellAbstract {
-    return this.board[xCoor][yCoor];
+    return this.board[yCoor][xCoor];
   }
 
   getTotalBombs(): number {
@@ -134,11 +138,21 @@ class GameBoard {
 
   replaceCell(oldCell: CellAbstract, newType: CellType): void | never {
     const [x, y] = oldCell.getCoors();
+    console.log('X : Y ', x, ' ', y);
+    console.log('LENGTH', this.board.length - 1, this.board[this.board.length - 1].length - 1);
     if ([x, y].includes(null)) {
       throw Error('replaceCell received a null coordinates value and could not complete operations');
     }
+    if (y as number > this.board.length) {
+      throw Error('y value was greater than board length');
+    }
+    if (x as number > this.board[y].length) {
+      console.warn('X:: ', x);
+      console.warn('row length:: ', this.board[y as number]);
+      throw Error('x value was greater than board y.length\n');
+    }
     const newCell: CellAbstract = this.memoryManager.getCell(newType, [x, y] as [number, number]);
-    // newCell.adoptProps(oldCell);
+    newCell.adoptProps(oldCell);
     this.board[y as number][x as number] = newCell;
     this.memoryManager.returnCell(oldCell);
   }

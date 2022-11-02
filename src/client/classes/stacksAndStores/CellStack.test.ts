@@ -15,7 +15,6 @@ import BombHiddenCell from '../game/cells/BombHiddenCell';
 import BombRevealedCell from '../game/cells/BombRevealedCell';
 import RedBombCell from '../game/cells/RedBombCell';
 import DefaultCell from '../game/cells/DefaultCell';
-import CellType from '../game/cells/cellTypeEnum';
 
 const argOptions = [
   [BlankFlaggedCell, 3],

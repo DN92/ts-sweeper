@@ -41,7 +41,7 @@ class CellStackManager {
     this.defaultCellStack = new CellStack(DefaultCell, sizeOptions.defaultCells);
   }
 
-  getCell(cellType: string, location: [number, number]): CellAbstract {
+  getCell(cellType: CellType, location: [number, number]): CellAbstract {
     switch (cellType) {
     case CellType.BLANK_HIDDEN:
       return this.blankHiddenCellStack.takeCell(location);

@@ -4,7 +4,8 @@ import GameBoardComponent from './GameBoard';
 
 function GameContainer() {
   useEffect(() => {
-    console.log('board', game.gameBoard.board.flat().map((cell) => cell.adjBombCount));
+    // console.log('board', game.gameBoard.board.flat().map((cell) => cell.coor));
+    // console.log('test: ', game.gameBoard.board[2][6]);
   }, []);
 
   return (
