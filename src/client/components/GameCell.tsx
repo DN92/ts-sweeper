@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import GameMain from '../classes/game/GameMain';
-import CellAbstract from '../classes/game/cells/CellAbstract';
+import GameMain from '../classes/game/GameMainClass';
+import CellAbstract from '../classes/game/cells/CellAbstractClass';
 import useClickTracker from '../hooks/useClickTracker';
 
 type props = {
@@ -14,14 +14,15 @@ function GameCell({ game, xCoor, yCoor }: props) {
 
   const cellCoor = `${yCoor}:${xCoor}`;
   const [cell, setCell] = useState<CellAbstract>(game.gameBoard.board[yCoor][xCoor]);
+  // console.log('cell from state after init', cell.getCoors());
 
   const refreshCell = (): void => {
     setCell(game.gameBoard.board[yCoor][xCoor]);
   };
 
-  // useEffect(() => {
-  //   console.log('cell', cell);
-  // }, [cell]);
+  useEffect(() => {
+    if (cell.coor.xCoor === null || cell.coor.yCoor === null) console.log('Cell now has null');
+  }, [cell]);
 
   return (
     <button
@@ -30,13 +31,18 @@ function GameCell({ game, xCoor, yCoor }: props) {
       style={cell.style.css}
       type="button"
       onClick={() => {
-        // console.log('cell: ', cell.getAdjBombCount());
-        // game.openCell(cell);
-        // refreshCell();
+        console.log('cell from state', cell);
+        game.openCell(cell);
+        refreshCell();
         // console.log('baord, ', game.gameBoard.board.flat().map((cell) => cell.adjBombCount));
       }}
     >
-      {cell.style.image ? (
+      {cell.hasBomb() ?
+        <img src="public/images/mine1.jpg" alt="mine" />
+        :
+        cell.adjBombCount}
+
+      {/* {cell.style.image ? (
         <img
           cell-coor={cellCoor}
           src={cell.style.image}
@@ -50,7 +56,7 @@ function GameCell({ game, xCoor, yCoor }: props) {
           >
             {(cell.isRevealed() && cell.getAdjBombCount() > 0) ? cell.getAdjBombCount() : '-1'}
           </p>
-        )}
+        )} */}
 
       {/* {cell.hasBomb() ? <img src="public/images/mine1.jpg" alt="bomb" /> : cell.getAdjBombCount() } */}
     </button>

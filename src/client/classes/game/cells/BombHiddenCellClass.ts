@@ -1,4 +1,4 @@
-import CellAbstract from './CellAbstract';
+import CellAbstract from './CellAbstractClass';
 import CellType from './cellTypeEnum';
 import cellStyles from './styleEnums';
 

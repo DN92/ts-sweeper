@@ -1,13 +1,13 @@
 import CellStack from '../stacksAndStores/CellStack';
-import CellAbstract from '../game/cells/CellAbstract';
-import BlankFlaggedCell from '../game/cells/BlankFlaggedCell';
-import BlankHiddenCell from '../game/cells/BlankHiddenCell';
-import BlankRevealedCell from '../game/cells/BlankRevealedCell';
-import BombFlaggedCell from '../game/cells/BombFlaggedCell';
-import BombHiddenCell from '../game/cells/BombHiddenCell';
-import BombRevealedCell from '../game/cells/BombRevealedCell';
-import RedBombCell from '../game/cells/RedBombCell';
-import DefaultCell from '../game/cells/DefaultCell';
+import CellAbstract from '../game/cells/CellAbstractClass';
+import BlankFlaggedCell from '../game/cells/BlankFlaggedCellClass';
+import BlankHiddenCell from '../game/cells/BlankHiddenCellClass';
+import BlankRevealedCell from '../game/cells/BlankRevealedCellClass';
+import BombFlaggedCell from '../game/cells/BombFlaggedCellClass';
+import BombHiddenCell from '../game/cells/BombHiddenCellClass';
+import BombRevealedCell from '../game/cells/BombRevealedCellClass';
+import RedBombCell from '../game/cells/RedBombCellClass';
+import DefaultCell from '../game/cells/DefaultCellClass';
 import CellType from '../game/cells/cellTypeEnum';
 
 interface sizeOptions {

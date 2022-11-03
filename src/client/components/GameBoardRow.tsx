@@ -1,5 +1,5 @@
 import React from 'react';
-import GameMain from '../classes/game/GameMain';
+import GameMain from '../classes/game/GameMainClass';
 import GameCell from './GameCell';
 
 type props = {

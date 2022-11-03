@@ -1,13 +1,13 @@
-import CellAbstract from './CellAbstract';
+import CellAbstract from './CellAbstractClass';
 import CellType from './cellTypeEnum';
 import cellStyles from './styleEnums';
 
-class BlankRevealed extends CellAbstract {
+class BombRevealed extends CellAbstract {
   constructor(x: number | null, y: number | null) {
     super(x, y);
-    this.type = CellType.BLANK_REVEALED;
+    this.type = CellType.BOMB_REVEALED;
     this.style = cellStyles.blankRevealed;
   }
 }
 
-export default BlankRevealed;
+export default BombRevealed;

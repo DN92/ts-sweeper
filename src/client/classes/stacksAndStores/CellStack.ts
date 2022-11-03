@@ -1,4 +1,4 @@
-import CellAbstract from '../game/cells/CellAbstract';
+import CellAbstract from '../game/cells/CellAbstractClass';
 
 type CellConstructor = new(x: number | null, y: number | null) => CellAbstract
 

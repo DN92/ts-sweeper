@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import CellAbstract from './CellAbstract';
+import CellAbstract from './CellAbstractClass';
 import CellType from './cellTypeEnum';
 
 function createCellNullNull(): CellAbstract {

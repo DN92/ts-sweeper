@@ -1,5 +1,5 @@
-import CellAbstract from './cells/CellAbstract';
-import CellStackManager from '../cellWorkers/CellStackManager';
+import CellAbstract from './cells/CellAbstractClass';
+import CellStackManagerClass from '../cellWorkers/CellStackManagerClass';
 import CellType from './cells/cellTypeEnum';
 import { gameOption } from './@types';
 
@@ -8,16 +8,16 @@ class GameBoard {
   columns: number;
   bombs: number;
   board: CellAbstract[][];
-  memoryManager: CellStackManager;
+  memoryManager: CellStackManagerClass;
   constructor(preset: gameOption) {
     this.rows = preset.size.rows;
     this.columns = preset.size.columns;
     this.bombs = preset.bombs;
     this.board = [];
-    this.memoryManager = new CellStackManager(preset.sizeOptions);
+    this.memoryManager = new CellStackManagerClass(preset.sizeOptions);
     this.generateBoard();
     console.log('generation completed');
-    console.log('GAMEBOARD: ', this.board);
+    console.log('GAMEBOARD: ', this.board.flat().map((cell) => cell.coor));
   }
 
   protected generateBoard(): void {
@@ -27,7 +27,6 @@ class GameBoard {
     for (let i = 0; i < this.rows; i++) {
       const arrayRow: CellAbstract[] = [];
       for (let j = 0; j < this.columns; j++) {
-        console.log(j);
         arrayRow.push(this.memoryManager.getCell(CellType.UNSET, [j, i]));
         gameBoardMemo.push([j, i]);
       }
@@ -43,17 +42,18 @@ class GameBoard {
       gameBoardMemo.splice(randomIdx, 1);
     }
 
-    // // fill rest of cells with blankHidden
-    // this.board.flat().forEach((cell) => {
-    //   if (cell.type === CellType.UNSET) {
-    //     this.replaceCell(cell, CellType.BLANK_HIDDEN);
-    //   }
-    // });
+    // fill rest of cells with blankHidden
+    this.board.flat().forEach((cell) => {
+      if (cell.type === CellType.UNSET) {
+        if (cell.coor.xCoor === null || cell.coor.yCoor === null) console.log('HERHEH');
+        this.replaceCell(cell, CellType.BLANK_HIDDEN);
+      }
+    });
 
-    // //  have each cell calculate it's adj bomb value and set
-    // this.board.flat().forEach((cell) => {
-    //   cell.setAdjBombCount(this.getAdjBombCount(cell));
-    // });
+    //  have each cell calculate it's adj bomb value and set
+    this.board.flat().forEach((cell) => {
+      cell.setAdjBombCount(this.getAdjBombCount(cell));
+    });
   }
 
   getBoardSize(): number {
@@ -136,17 +136,16 @@ class GameBoard {
     return this.board.flat().map((cell) => cell.type).includes(CellType.RED_BOMB);
   }
 
-  replaceCell(oldCell: CellAbstract, newType: CellType): void | never {
+  replaceCell(oldCell: CellAbstract, newType: CellType) {
     const [x, y] = oldCell.getCoors();
-    console.log('X : Y ', x, ' ', y);
-    console.log('LENGTH', this.board.length - 1, this.board[this.board.length - 1].length - 1);
     if ([x, y].includes(null)) {
+      console.warn('BAD CELL:: ', oldCell);
       throw Error('replaceCell received a null coordinates value and could not complete operations');
     }
     if (y as number > this.board.length) {
       throw Error('y value was greater than board length');
     }
-    if (x as number > this.board[y].length) {
+    if (x as number > this.board[y as number].length) {
       console.warn('X:: ', x);
       console.warn('row length:: ', this.board[y as number]);
       throw Error('x value was greater than board y.length\n');
@@ -155,6 +154,8 @@ class GameBoard {
     newCell.adoptProps(oldCell);
     this.board[y as number][x as number] = newCell;
     this.memoryManager.returnCell(oldCell);
+    console.log('new Cell from replace cell:: ', newCell);
+    return newCell;
   }
 
   handleFlagging(cell: CellAbstract): void {
@@ -175,6 +176,7 @@ class GameBoard {
   }
 
   handleRevealing(cell: CellAbstract): void {
+    if (cell.coor.xCoor === null || cell.coor.yCoor === null) console.log('HERHEH REVEALING');
     function getOppositeType(inputType: CellType): CellType {
       const transitions: Partial<Record<CellType, CellType>> = {
         [CellType.BLANK_FLAGGED]: CellType.BLANK_FLAGGED,
@@ -194,6 +196,9 @@ class GameBoard {
   swapCells(cell1: CellAbstract, cell2: CellAbstract): void {
     const [x1, y1] = cell1.getCoors();
     const [x2, y2] = cell2.getCoors();
+
+    console.log('SWAP CELLS x1, y1:: ', x1, y1, ' x2, y2:: ', x2, y2);
+
     const tempCell = this.memoryManager.getCell(CellType.UNSET, [x1 as number, y1 as number]);
     tempCell.adoptProps(cell1);
     cell1.adoptProps(cell2);

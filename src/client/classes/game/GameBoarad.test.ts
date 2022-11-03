@@ -6,18 +6,18 @@
 // @ts-nocheck
 
 import { TestFunction, TestOptions } from 'vitest';
-import GameBoard from './GameBoard';
+import GameBoard from './GameBoardClass';
 import CellType from './cells/cellTypeEnum';
-import CellAbstract from './cells/CellAbstract';
+import CellAbstract from './cells/CellAbstractClass';
 import CellStack from '../stacksAndStores/CellStack';
-import BlankFlaggedCell from './cells/BlankFlaggedCell';
-import BlankHiddenCell from './cells/BlankHiddenCell';
-import BlankRevealedCell from './cells/BlankRevealedCell';
-import BombFlaggedCell from './cells/BombFlaggedCell';
-import BombHiddenCell from './cells/BombHiddenCell';
-import BombRevealedCell from './cells/BombRevealedCell';
-import RedBombCell from './cells/RedBombCell';
-import DefaultCell from './cells/DefaultCell';
+import BlankFlaggedCell from './cells/BlankFlaggedCellClass';
+import BlankHiddenCell from './cells/BlankHiddenCellClass';
+import BlankRevealedCell from './cells/BlankRevealedCellClass';
+import BombFlaggedCell from './cells/BombFlaggedCellClass';
+import BombHiddenCell from './cells/BombHiddenCellClass';
+import BombRevealedCell from './cells/BombRevealedCellClass';
+import RedBombCell from './cells/RedBombCellClass';
+import DefaultCell from './cells/DefaultCellClass';
 
 
 type Test = (name: string, fn: TestFunction, timeout?: number | TestOptions) => void
@@ -176,24 +176,24 @@ describe('Gameboard', () => {
     const testerArr2 = [
       [0, 1],
       [1, 2],
-      [2, 3],
+      [6, 2],
     ];
     test('if old cell does not have set coordinates, throws an error', () => {
-      // testerArr1.forEach((tester) => {
-      //   expect(() => gameBoard.replaceCell(new CellAbstract(...tester), new CellAbstract(...tester)))
-      //     .toThrowError('could not complete');
-      // });
+      testerArr1.forEach((tester) => {
+        expect(() => gameBoard.replaceCell(new CellAbstract(...tester), new CellAbstract(...tester)))
+          .toThrowError('could not complete');
+      });
     });
-    // test('replace cell replaces chosen cell with correct type and index', () => {
-    //   expect(cellTypes.length).toBeGreaterThan(0);
-    //   cellTypes.forEach((type) => {
-    //     gameBoard.replaceCell(board[indexY][indexX], type);
-    //     expect(board[indexY][indexX].type).toBe(type);
-    //     testerArr2.forEach(([xIdx, yIdx]) => {
-    //       gameBoard.replaceCell(board[yIdx][xIdx], type);
-    //       expect(board[xIdx][yIdx].coor).toEqual({ xCoor: xIdx, yCoor: yIdx });
-    //     });
-    //   });
-    // });
+    test('replace cell replaces chosen cell with correct type and index', () => {
+      expect(cellTypes.length).toBeGreaterThan(0);
+      cellTypes.forEach((type) => {
+        gameBoard.replaceCell(board[indexY][indexX], type);
+        expect(board[indexY][indexX].type).toBe(type);
+        testerArr2.forEach(([xIdx, yIdx]) => {
+          gameBoard.replaceCell(board[yIdx][xIdx], type);
+          expect(board[yIdx][xIdx].coor).toEqual({ xCoor: xIdx, yCoor: yIdx });
+        });
+      });
+    });
   });
 });

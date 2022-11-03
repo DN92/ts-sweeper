@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 
-import GameBoard from './GameBoard';
+import GameBoard from './GameBoardClass';
 import gamePresets from './gamePresets';
-import CellAbstract from './cells/CellAbstract';
+import CellAbstract from './cells/CellAbstractClass';
 import CellType from './cells/cellTypeEnum';
 import { gameStatus, gameClock } from './@types';
 
@@ -67,6 +67,7 @@ class GameMain {
       if (this.firstMove) {
         this.firstMove = false;
         gameCell = this.gameBoard.swapOutBomb(gameCell); // swapOutBomb returns the new cell
+        if (gameCell.coor.xCoor === null || gameCell.coor.yCoor === null) console.log('HERHEH OpenBombCell');
         this.gameBoard.handleRevealing(gameCell);
       } else {
         //  else place the red bomb & game over signal
@@ -80,12 +81,13 @@ class GameMain {
     const openHiddenCell = (): void => {
       this.firstMove = false;
       gameCell.setTriedTrue();
+      if (gameCell.coor.xCoor === null || gameCell.coor.yCoor === null) console.log('HERHEH OpenHiddenCell ::', gameCell);
       this.gameBoard.handleRevealing(gameCell);
-      if (gameCell.getAdjBombCount() === 0) {
-        this.gameBoard.getAdjCells(gameCell).forEach((cell) => {
-          this.openCell(cell);
-        });
-      }
+      // if (gameCell.getAdjBombCount() === 0) {
+      //   this.gameBoard.getAdjCells(gameCell).forEach((cell) => {
+      //     this.openCell(cell);
+      //   });
+      // }
     };
 
     const openRevealedCell = (): void => {
@@ -96,6 +98,7 @@ class GameMain {
       const adjCells = this.gameBoard.getAdjCells(gameCell);
       adjCells.forEach((cell) => {
         if (cell.isTried()) return;
+        if (gameCell.coor.xCoor === null || gameCell.coor.yCoor === null) console.log('HERHEH OpenRevealedCell');
         this.gameBoard.handleRevealing(cell);
       });
     };

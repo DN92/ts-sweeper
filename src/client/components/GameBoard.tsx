@@ -1,8 +1,8 @@
 import React, { useState, MouseEvent, FocusEvent } from 'react';
-import GameMain from '../classes/game/GameMain';
+import GameMain from '../classes/game/GameMainClass';
 import GameBoardRow from './GameBoardRow';
 import useClickTracker from '../hooks/useClickTracker';
-import CellAbstract from '../classes/game/cells/CellAbstract';
+import CellAbstract from '../classes/game/cells/CellAbstractClass';
 
 type props = {
   game: GameMain

@@ -97,7 +97,7 @@ class CellAbstract {
     return [
       CellType.BLANK_HIDDEN,
       CellType.BOMB_HIDDEN,
-      CellType.UNSET,
+      // CellType.UNSET,
       CellType.BLANK_FLAGGED,
       CellType.BOMB_FLAGGED,
     ].includes(this.type);
